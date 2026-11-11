@@ -10,6 +10,7 @@ affiliation: "UM FERI · LIS"
 email: "alen.rajsp@um.si"
 feriUrl: "https://ii.feri.um.si/sl/person/alen-rajsp/"
 researchAreas: []
+image: "/images/alen-rajsp.jpg"
 memberType: "core"
 order: 5
 githubUrl: "https://github.com/alenrajsp"

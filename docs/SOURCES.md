@@ -28,7 +28,7 @@ Four real professional photographs were retrieved from the official profile mark
 - Tina Beranič: https://ii.feri.um.si/wp-content/uploads/2017/01/Beranic_Tina.jpg
 - Viktor Taneski: https://ii.feri.um.si/wp-content/uploads/2017/01/Taneski_Viktor.jpg
 
-Credit: Institute of Informatics, UM FERI. These are institutional photographs reused in their professional lab-profile context; no open/relicensing claim is made. The other official pages supplied the same generated binary-face avatar, not a real portrait. Those members use the site's original initials fallback instead. External collaborators use the same fallback. No random or synthesized human portraits are used.
+Credit: Institute of Informatics, UM FERI. These are institutional photographs reused in their professional lab-profile context; no open/relicensing claim is made. The other official pages supplied the same generated binary-face avatar, not a real portrait. On 11 November 2026, the user supplied real portraits of Luka Četina (`temp/luka-cetina.jpg`) and Alen Rajšp (`temp/alen-rajsp.jpg`). Both were imported to `public/images/` and connected to their Slovenian and English profiles, then resized to 500 × 500 pixels and JPEG-compressed to approximately 40 KB at the user’s request; the site does not depend on the temporary originals. Members without a supplied photograph and external collaborators use the site's original initials fallback. No random or synthesized human portraits are used.
 
 ## Scientific publications
 
@@ -97,3 +97,7 @@ The user supplied the registration URL for `demystifying-agentic-development`: h
 ## People roles corrected — 6 November 2026
 
 The user confirmed Viktor Taneski is **Docent / Assistant Professor** and Lidija Vincekovič is **Mlada raziskovalka / Early-career Researcher**. This current user-provided information supersedes the earlier institutional teaching-assistant labels. Both language entries are corrected, including Lidija’s description and body text.
+
+## Luka Četina biography update — 11 November 2026
+
+The user supplied the complete Slovenian and English descriptions of Luka Četina’s research and teaching, plus ORCID https://orcid.org/0009-0000-0267-1092. Both biographies and their short descriptions use the supplied wording verbatim; the ORCID is recorded in both language entries.

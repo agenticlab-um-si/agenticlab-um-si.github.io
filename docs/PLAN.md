@@ -1,5 +1,27 @@
 # Implementation plan
 
+## People ordering and homepage portraits — 11 November 2026
+
+- [x] Sort core members and collaborators by surname, then given name, using Slovenian collation in both languages.
+- [x] Feature Luka Pavlič, Marjan Heričko, Tina Beranič, Luka Četina and Alen Rajšp in that order on both homepages, with smaller centered portraits and a responsive five-column desktop grid.
+- [x] Run verification, assert generated ordering and review Safari rendering.
+
+## Luka Četina biography — 11 November 2026
+
+- [x] Update the Slovenian and English descriptions from the user’s supplied text and add his ORCID to both entries.
+- [x] Run verification and inspect the profile in Safari.
+
+## Portrait optimization — 11 November 2026
+
+- [x] Resize both supplied portraits to 500 × 500 pixels, matching existing portraits, and compress to approximately 40 KB without changing the crop.
+- [x] Run verification and review optimized portraits in Safari.
+
+## User-supplied portraits — 11 November 2026
+
+- [x] Copy Luka Četina’s and Alen Rajšp’s supplied photos to permanent public assets and use them in both languages.
+- [x] Preserve the temporary import directory with `temp/.gitkeep`; keep original uploads available for the user to remove.
+- [x] Run verification, inspect the portraits in Safari and leave the development server running.
+
 ## Default Light theme — 11 November 2026
 
 - [x] Default first paint and the selector to Light; preserve explicit Light/Dark/System choices across visits, with Light as the missing/invalid/storage-failure fallback.

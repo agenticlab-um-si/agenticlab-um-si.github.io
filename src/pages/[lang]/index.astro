@@ -10,7 +10,8 @@ const lang=Astro.params.lang as Lang;
 const [pages,research,references,events,people,services]=await Promise.all([collection('pages',lang),collection('research',lang),collection('references',lang),collection('events',lang),collection('people',lang),collection('services',lang)]);
 const page=pages.find(p=>p.data.key==='home')!;
 const event=events.filter(e=>isUpcoming(e)).sort((a,b)=>Date.parse(a.data.date)-Date.parse(b.data.date))[0];
-const core=people.filter(p=>p.data.memberType==='core').slice(0,4);
+const featuredPeople=['luka-pavlic','marjan-hericko','tina-beranic','luka-cetina','alen-rajsp'];
+const core=featuredPeople.map(key=>people.find(p=>p.data.key===key && p.data.memberType==='core')!);
 const shortNames=lang==='en'?['Agentic Software Engineering','AI for Software Engineering','Software Quality & Analytics','DevOps / DevSecOps','Modern Software Architectures','UX & Accessibility']:['Agentno programsko inženirstvo','UI za programsko inženirstvo','Kakovost in inženirska analitika','DevOps / DevSecOps','Sodobne arhitekture','UX in dostopnost'];
 ---
 <Layout lang={lang} title={page.data.title} description={page.data.shortDescription}>

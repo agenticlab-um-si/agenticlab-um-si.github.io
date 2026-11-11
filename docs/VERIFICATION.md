@@ -1,5 +1,36 @@
 # Verification — 3 November 2026
 
+## Homepage order correction — 11 November 2026
+
+- Changed both homepage previews to Luka Pavlič, Marjan Heričko, Tina Beranič, Luka Četina and Alen Rajšp, as requested. Alphabetical people lists and portrait sizing are unchanged. Generated HTML assertions confirmed the exact sequence in both languages.
+- `npm run verify` passed: 0 errors/warnings/hints; 79 static pages, 76 translated routes, 2,744 internal links/assets and all 5 calendar cases. No new visual review for this order-only correction. Development server remains running; no push or deployment.
+
+## People ordering and homepage portraits — 11 November 2026
+
+- Both people lists now sort core members and collaborators separately by surname, then given name with Slovenian collation. Both homepages feature exactly Marjan Heričko, Luka Pavlič, Tina Beranič, Luka Četina and Alen Rajšp in that order. Generated HTML assertions confirmed all four pages.
+- Homepage uses five desktop columns with centered portraits at approximately two thirds of the former four-column portrait width; text and tags are centered too. Responsive rules use three columns below 1000px and two below 760px, with smaller portraits.
+- `npm run verify` passed: 0 errors/warnings/hints across 26 files; 79 static pages, 76 translated routes, 2,744 internal links/assets and all 5 calendar cases. `git diff --check` passed.
+- Safari desktop light: visually reviewed all five homepage portraits, centered names/roles/tags and the first alphabetical row on the people page. Accessibility state confirmed all core/collaborator ordering. No new mobile-width or theme review was performed. Server remains running at http://127.0.0.1:4321/; no push or deployment.
+
+## Luka Četina biography — 11 November 2026
+
+- Replaced the biography and short description in both languages with the user-supplied wording and added ORCID https://orcid.org/0009-0000-0267-1092. Generated HTML assertions confirmed both descriptions and links.
+- `npm run verify` passed: 0 errors/warnings/hints across 26 files; 79 static pages, 76 translated routes, 2,740 internal links/assets and all 5 calendar cases.
+- Safari desktop light: visually reviewed the complete Slovenian description and ORCID button, then switched to the equivalent English profile and confirmed the translated content and ORCID in accessibility state. No mobile/theme review. Development server remains running; no push or deployment.
+
+## Portrait optimization — 11 November 2026
+
+- Resized both new portraits to 500 × 500 pixels, matching the four existing portraits, and compressed their JPEGs: Alen Rajšp 476,753 → 37,507 bytes; Luka Četina 119,688 → 39,556 bytes. The original crop and temporary uploads are preserved. This supersedes the earlier byte-identical import state documented below.
+- `npm run verify` passed: 0 errors/warnings/hints; 79 static pages, 76 translated routes, 2,740 internal links/assets and all 5 calendar cases.
+- Visually reviewed both optimized Slovenian profiles in Safari desktop light; faces and existing layout render correctly. No new mobile/theme review. Development server remains running; no push or deployment.
+
+## User-supplied portraits — 11 November 2026
+
+- Copied the supplied Luka Četina and Alen Rajšp JPEGs unchanged into `public/images/` and linked both Slovenian and English content entries. Byte comparisons confirm the copies match; generated HTML assertions confirm both images on both people lists and all four profiles. Temporary uploads remain for the user to remove; `temp/.gitkeep` preserves the import directory.
+- `npm run verify` passed: 0 errors/warnings/hints across 26 files; 79 static HTML pages, 76 translated routes, 2,740 internal links/assets and all 5 calendar cases.
+- Safari desktop light: visually reviewed Luka’s Slovenian profile and Alen’s English profile; both portraits display with intact faces and normal spacing. Confirmed both image alternatives on the Slovenian people list. No mobile-width or additional theme review was performed.
+- Development server left running at http://127.0.0.1:4321/ (PID 5822). No deployment or push occurred.
+
 ## Default Light theme — 11 November 2026
 
 - Changed the shared first-paint theme and selector default to **Light**, independent of OS appearance. Existing explicit choices still apply. Explicit System is now stored as `system`, so it can be distinguished from a first visit. Missing/invalid preferences, storage reset or denied storage fall back to Light. README updated.

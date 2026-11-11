@@ -72,6 +72,10 @@ a:hover .arrow { transform: translate(3px, -2px); }
 .filter-bar button { padding: .5rem .85rem; border: 1px solid var(--color-line); border-radius: 30px; font-size: .72rem; font-weight: 650; }
 .filter-bar button[aria-pressed='true'] { background: var(--color-brand); color: var(--color-on-brand); border-color: var(--color-brand); }
 .people-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 2.5rem 1.5rem; }
+.people-preview .people-grid { grid-template-columns: repeat(5,minmax(0,1fr)); }
+.people-preview .person-card { text-align: center; }
+.people-preview .person-image { width: 83.333%; margin-inline: auto; }
+.people-preview .tags { justify-content: center; }
 .person-card { min-width: 0; position: relative; }
 .person-image { aspect-ratio: 1 / 1.12; background: var(--color-soft); overflow: hidden; border-radius: var(--radius); margin-bottom: 1.1rem; }
 .person-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; filter: saturate(.65); transition: filter .3s, transform .3s; }
@@ -137,3 +141,11 @@ a:hover .arrow { transform: translate(3px, -2px); }
   .service-item > .prose { grid-column: 2; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+
+@media (max-width: 1000px) {
+  .people-preview .people-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .people-preview .person-image { width: 66.667%; max-width: 200px; }
+}
+@media (max-width: 760px) {
+  .people-preview .people-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
