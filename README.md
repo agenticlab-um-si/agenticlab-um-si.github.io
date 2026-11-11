@@ -13,7 +13,21 @@ npm ci
 npm run dev
 ```
 
-Open the printed local URL (normally `http://127.0.0.1:4321`). `/` forwards to `/en/`, the default English homepage; `/sl/` is the Slovenian homepage. The default server listens on loopback only.
+Open the printed local URL (normally `http://127.0.0.1:4321`). `/` forwards to the page selected in `settings.json` (currently the English Coming soon page). The full homepages remain at `/en/` and `/sl/`. The default server listens on loopback only.
+
+### Choose the default page
+
+Edit `defaultPage` in **`settings.json`**. Allowed values:
+
+| Value | Destination when visiting `/` |
+| --- | --- |
+| `sl` | Slovenian homepage, `/sl/` |
+| `en` | English homepage, `/en/` |
+| `coming-soon` | Standalone English launch page, `/coming-soon/` |
+
+On GitHub you can override the file under **Settings → Secrets and variables → Actions → Variables → New repository variable**: name **`DEFAULT_PAGE`**, value **`sl`**, **`en`** or **`coming-soon`**. After changing a repository variable, run the Pages workflow manually (Actions → Deploy static site to GitHub Pages → Run workflow), or push to `main`; changing a variable alone does not trigger a build. Remove/empty the variable to use `settings.json` again. Invalid values stop the build with an explanatory error.
+
+For a one-off local build, use `DEFAULT_PAGE=en npm run build`. Selection happens at build time and changes only the root redirect. `/en/` always serves the full English site and `/sl/` the full Slovenian site. `/coming-soon/` is English only and has no language selector, navigation or logo link to the full site; the full site remains accessible by entering its URL directly. Launch-page copy is editable in `src/content/pages/en/coming-soon.md`.
 
 ```sh
 npm run check    # Astro and TypeScript diagnostics
@@ -104,7 +118,7 @@ Research theme colours, matching soft backgrounds, and dark-theme equivalents ar
 
 The palette uses warm paper neutrals and olive for the lab identity, with violet, blue, teal, orange, coral and ochre for research. Dark mode uses green charcoal surfaces and individually tuned lighter accents. Diagrams encode engineering processes and evidence transfer; no decorative AI imagery.
 
-Theme starts in **System**. A synchronous script in `Layout.astro` applies the OS preference before content paints. The compact labelled native select provides System/Light/Dark; explicit choices persist as `agentic-theme` in localStorage. Selecting System removes that override. OS changes are observed live; storage failures do not break the site. Reduced-motion preference disables movement. The mobile menu uses native `<details>` and closes with Escape; navigation works without JavaScript. Reference filters progressively enhance an already visible full list.
+Theme starts in **Light**, regardless of OS appearance. A synchronous script in `Layout.astro` applies a saved choice before content paints. The compact labelled native select provides System/Light/Dark; all explicit choices, including System, persist as `agentic-theme` in localStorage. OS changes are observed live when System is selected; missing/invalid preferences or storage failures fall back to Light. Reduced-motion preference disables movement. The mobile menu uses native `<details>` and closes with Escape; navigation works without JavaScript. Reference filters progressively enhance an already visible full list.
 
 ## Static deployment
 

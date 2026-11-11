@@ -3,6 +3,21 @@ import { resolve, join } from 'node:path';
 import assert from 'node:assert/strict';
 const root=resolve('dist');
 const base=(process.env.BASE_PATH||'').replace(/\/$/,'');
+const settings=JSON.parse(await readFile(resolve('settings.json'),'utf8'));
+const defaultPage=process.env.DEFAULT_PAGE||settings.defaultPage;
+assert.ok(['sl','en','coming-soon'].includes(defaultPage),'Choose sl, en or coming-soon as the default page');
+const destination=`${base}/${defaultPage}/`;
+const rootHTML=await readFile(join(root,'index.html'),'utf8');
+assert.ok(rootHTML.includes(`content="0;url=${destination}"`),'Root redirects to the configured default page');
+assert.ok(rootHTML.includes(`href="${destination}"`),'Root fallback link matches the configured default page');
+const launchHTML=await readFile(join(root,'coming-soon/index.html'),'utf8');
+assert.match(launchHTML,/<html lang="en"/,'Coming soon is English');
+assert.equal((launchHTML.match(/<h1(?:\s|>)/g)||[]).length,1,'Coming soon has one main heading');
+assert.match(launchHTML,/<main id="main"/,'Coming soon has a main landmark');
+for(const match of launchHTML.matchAll(/\bhref="([^"]+)"/g)) {
+  const pathname=new URL(match[1],'https://local.test').pathname;
+  assert.ok(!pathname.startsWith(`${base}/en/`)&&!pathname.startsWith(`${base}/sl/`),'Coming soon must not link to the full site, including metadata');
+}
 async function walk(dir){return(await Promise.all((await readdir(dir,{withFileTypes:true})).map(e=>e.isDirectory()?walk(join(dir,e.name)):join(dir,e.name)))).flat();}
 const files=(await walk(root)).filter(f=>f.endsWith('.html'));
 let links=0,languagePairs=0;

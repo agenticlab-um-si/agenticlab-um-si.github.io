@@ -1,5 +1,22 @@
 # Implementation plan
 
+## Default Light theme — 11 November 2026
+
+- [x] Default first paint and the selector to Light; preserve explicit Light/Dark/System choices across visits, with Light as the missing/invalid/storage-failure fallback.
+- [x] Verify theme behavior against both OS appearances, run full verification and review Safari rendering.
+
+## Standalone Coming soon correction — 11 November 2026
+
+- [x] Serve the English launch page at `/coming-soon/` only; keep `/en/` and `/sl/` as directly accessible full homepages.
+- [x] Remove all full-site links from the launch page, including the header logo, language selector and translated metadata; correct the root selection, sitemap and README.
+- [x] Run verification with a regression assertion for launch-page links and confirm all three routes and the root redirect in Safari.
+
+## Configurable landing page — 11 November 2026
+
+- [x] Add bilingual Coming soon pages using the existing logo, theme controls and translated content files.
+- [x] Select the root destination through `settings.json` or the GitHub Actions repository variable `DEFAULT_PAGE`: `sl`, `en`, `coming-soon`. Default to `coming-soon` and reject invalid values.
+- [x] Verify all choices, a subpath deployment and invalid configuration; inspect Safari and document rebuild instructions.
+
 ## GitHub Pages deployment — 11 November 2026
 
 - [x] Set the user-confirmed production origin to `https://agenticlab-um-si.github.io` with root base `/`, preserving environment overrides.

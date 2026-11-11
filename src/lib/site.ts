@@ -1,4 +1,14 @@
 import { getCollection, type CollectionKey } from 'astro:content';
+import settings from '../../settings.json';
+export const landingPages = ['sl', 'en', 'coming-soon'] as const;
+export type LandingPage = typeof landingPages[number];
+export function getDefaultPage(): LandingPage {
+  const value = import.meta.env.DEFAULT_PAGE || settings.defaultPage;
+  if (!landingPages.includes(value as LandingPage)) {
+    throw new Error('Invalid defaultPage / DEFAULT_PAGE. Choose sl, en or coming-soon.');
+  }
+  return value as LandingPage;
+}
 export type Lang = 'sl' | 'en';
 export const languages: Lang[] = ['sl', 'en'];
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');

@@ -1,5 +1,8 @@
 ---
-import {href} from '../lib/site';
+import {asset, href, getDefaultPage} from '../lib/site';
 import Favicon from '../components/Favicon.astro';
+const defaultPage = getDefaultPage();
+const lang = defaultPage === 'sl' ? 'sl' : 'en';
+const destination = defaultPage === 'coming-soon' ? asset('coming-soon/') : href(lang);
 ---
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta http-equiv="refresh" content={`0;url=${href('en')}`}/><title>Agentic Lab</title><meta name="description" content="Agentic Lab — researching modern software engineering and AI agents at UM FERI."/><Favicon /></head><body><a href={href('en')}>Agentic Lab · English</a><a href={href('sl')}>Slovenščina</a></body></html>
+<!doctype html><html lang={lang}><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta http-equiv="refresh" content={`0;url=${destination}`}/><title>Agentic Lab</title><meta name="description" content={lang === 'sl' ? 'Agentic Lab — raziskovanje sodobnega programskega inženirstva in agentov UI na UM FERI.' : 'Agentic Lab — researching modern software engineering and AI agents at UM FERI.'}/><Favicon /></head><body><a href={destination}>Agentic Lab · {defaultPage === 'coming-soon' ? 'Coming soon' : lang === 'sl' ? 'Slovenščina' : 'English'}</a></body></html>

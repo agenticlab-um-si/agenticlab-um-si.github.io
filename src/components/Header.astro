@@ -1,33 +1,34 @@
 ---
 import { asset, href, navigation, t, type Lang } from '../lib/site';
-interface Props { lang: Lang; path?: string }
-const { lang, path = '' } = Astro.props;
+interface Props { lang: Lang; path?: string; minimal?: boolean }
+const { lang, path = '', minimal = false } = Astro.props;
 const current = path.split('/')[0];
+const BrandTag = minimal ? 'span' : 'a';
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="wordmark" href={href(lang)} aria-label={t(lang,'Agentic Lab homepage','Agentic Lab — domača stran')}><img class="brand-symbol" src={asset('branding/agentic-lab-mark-recoloured.png')} alt="" width="48" height="48" /><span>agentic<span class="wordmark-light">lab</span><span class="brand-dot">.</span></span></a>
-    <nav class="desktop-nav" aria-label={t(lang,'Main navigation','Glavna navigacija')}>
+    <BrandTag class="wordmark" href={minimal ? undefined : href(lang)} aria-label={minimal ? 'Agentic Lab' : t(lang,'Agentic Lab homepage','Agentic Lab — domača stran')}><img class="brand-symbol" src={asset('branding/agentic-lab-mark-recoloured.png')} alt="" width="48" height="48" /><span>agentic<span class="wordmark-light">lab</span><span class="brand-dot">.</span></span></BrandTag>
+    {!minimal && <nav class="desktop-nav" aria-label={t(lang,'Main navigation','Glavna navigacija')}>
       {navigation[lang].map(([slug,label]) => <a href={href(lang,slug)} aria-current={current === slug ? 'page' : undefined}>{label}</a>)}
-    </nav>
+    </nav>}
     <div class="header-tools">
-      <div class="language-switch" role="group" aria-label={t(lang,'Language','Jezik')}>
+      {!minimal && <div class="language-switch" role="group" aria-label={t(lang,'Language','Jezik')}>
         {(['sl','en'] as Lang[]).map(l => <a href={href(l,path)} lang={l} hreflang={l} aria-current={l === lang ? 'true' : undefined} aria-label={l==='sl'?'Slovenščina':'English'}>{l.toUpperCase()}</a>)}
-      </div>
-      <label class="theme-control"><span aria-hidden="true">◐</span><span class="sr-only">{t(lang,'Colour theme','Barvna tema')}</span><select id="theme-select" aria-label={t(lang,'Colour theme','Barvna tema')}><option value="system">{t(lang,'System','Sistem')}</option><option value="light">{t(lang,'Light','Svetla')}</option><option value="dark">{t(lang,'Dark','Temna')}</option></select></label>
-      <details class="mobile-menu"><summary aria-label={t(lang,'Open navigation menu','Odpri navigacijski meni')}><span class="menu-lines" aria-hidden="true"></span></summary><nav aria-label={t(lang,'Mobile navigation','Mobilna navigacija')}>{navigation[lang].map(([slug,label],i) => <a href={href(lang,slug)} aria-current={current === slug ? 'page' : undefined}><span>0{i+1}</span>{label}<span aria-hidden="true">↗</span></a>)}</nav></details>
+      </div>}
+      <label class="theme-control"><span aria-hidden="true">◐</span><span class="sr-only">{t(lang,'Colour theme','Barvna tema')}</span><select id="theme-select" aria-label={t(lang,'Colour theme','Barvna tema')}><option value="system">{t(lang,'System','Sistem')}</option><option value="light" selected>{t(lang,'Light','Svetla')}</option><option value="dark">{t(lang,'Dark','Temna')}</option></select></label>
+      {!minimal && <details class="mobile-menu"><summary aria-label={t(lang,'Open navigation menu','Odpri navigacijski meni')}><span class="menu-lines" aria-hidden="true"></span></summary><nav aria-label={t(lang,'Mobile navigation','Mobilna navigacija')}>{navigation[lang].map(([slug,label],i) => <a href={href(lang,slug)} aria-current={current === slug ? 'page' : undefined}><span>0{i+1}</span>{label}<span aria-hidden="true">↗</span></a>)}</nav></details>}
     </div>
   </div>
 </header>
 <script>
   const select = document.querySelector<HTMLSelectElement>('#theme-select');
   const media = window.matchMedia('(prefers-color-scheme: dark)');
-  let preference = 'system';
-  try { const saved = localStorage.getItem('agentic-theme'); if (saved === 'light' || saved === 'dark') preference = saved; } catch { /* Storage is optional. */ }
+  let preference = 'light';
+  try { const saved = localStorage.getItem('agentic-theme'); if (saved === 'light' || saved === 'dark' || saved === 'system') preference = saved; } catch { /* Storage is optional. */ }
   const apply = () => { document.documentElement.dataset.theme = preference === 'system' ? (media.matches ? 'dark' : 'light') : preference; };
-  if (select) { select.value = preference; select.addEventListener('change', () => { preference = select.value; try { if (preference === 'system') localStorage.removeItem('agentic-theme'); else localStorage.setItem('agentic-theme', preference); } catch {} apply(); }); }
+  if (select) { select.value = preference; select.addEventListener('change', () => { preference = select.value; try { localStorage.setItem('agentic-theme', preference); } catch {} apply(); }); }
   media.addEventListener('change', apply);
-  window.addEventListener('storage', (event) => { if(event.key === 'agentic-theme') { preference = event.newValue === 'dark' || event.newValue === 'light' ? event.newValue : 'system'; if(select) select.value = preference; apply(); } });
+  window.addEventListener('storage', (event) => { if(event.key === 'agentic-theme') { preference = event.newValue === 'dark' || event.newValue === 'system' ? event.newValue : 'light'; if(select) select.value = preference; apply(); } });
   const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary')?.focus(); } });
   document.addEventListener('click', (event) => { if(menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false; });

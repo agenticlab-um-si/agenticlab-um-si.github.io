@@ -1,5 +1,31 @@
 # Verification — 3 November 2026
 
+## Default Light theme — 11 November 2026
+
+- Changed the shared first-paint theme and selector default to **Light**, independent of OS appearance. Existing explicit choices still apply. Explicit System is now stored as `system`, so it can be distinguished from a first visit. Missing/invalid preferences, storage reset or denied storage fall back to Light. README updated.
+- Executed the actual inline first-paint script and TypeScript-transpiled header script in a mocked browser context: **12 combinations** of light/dark OS appearance and absent/light/dark/system/invalid/blocked storage passed. Assertions covered the first paint, selector value, all three choices, persistence and cross-tab preference reset.
+- `npm run verify` passed: **0 errors/warnings/hints across 26 files; 79 static HTML pages, 76 translated routes, 2,732 internal links/assets; all 5 calendar cases**.
+- Safari: reloaded `/coming-soon/`, confirmed the selector displays Light and visually reviewed the light page. The existing browser preference was retained; the fresh-visitor/dark-OS default was verified by the script scenarios rather than changing OS settings or clearing browser data. No new phone-width review, deployment or push.
+
+## Standalone Coming soon correction — 11 November 2026
+
+This supersedes the bilingual launch-page routing described in the earlier configurable-landing-page entry below.
+
+- Moved the launch page to **`/coming-soon/`**, English only; removed `/en/coming-soon/`, `/sl/coming-soon/` and the unused Slovenian launch content. Full `/en/` and `/sl/` homepages remain generated and directly accessible. `coming-soon` in `settings.json` or `DEFAULT_PAGE` now sends only the root `/` to `/coming-soon/`.
+- Launch header has a non-linked wordmark and no language selector or full-site navigation. Its canonical/OpenGraph URL points to `/coming-soon/`; no alternate-language links to the full site are emitted. Contact and theme controls remain. Sitemap and README reflect the standalone route.
+- `npm run verify` passed: **0 errors/warnings/hints across 26 files; 79 static HTML pages, 76 translated routes, 2,732 internal links/assets and all 5 calendar cases**. Added a regression assertion that scans every launch-page `href`, including metadata, and rejects `/en/` or `/sl/` destinations; verifies English language, single h1 and main landmark as well as the configured root redirect.
+- Safari: entered `/coming-soon/` directly and visually confirmed the standalone English page without language controls or a clickable wordmark. Entered `/en/` and `/sl/` directly and confirmed their respective full homepage headings/navigation. Entered `/` and confirmed navigation to `/coming-soon/`; the accessibility state lists only the skip link and email contact as page links. No mobile-width review was performed.
+- Development server remains running. No deployment or push occurred.
+
+## Configurable landing page — 11 November 2026
+
+- Added `/en/coming-soon/` and `/sl/coming-soon/` with paired editable page content, existing brand assets/tokens, the shared first-paint theme and persistent theme controls, equivalent language switching and verified contact destination. A minimal shared-layout option omits full navigation and the institutional footer on these two pages only. Both are included in the sitemap.
+- `settings.json` selects `defaultPage`, currently **coming-soon**. `DEFAULT_PAGE` overrides it at build time; the Pages workflow reads the repository Actions variable of the same name. Supported values are **sl**, **en**, **coming-soon**; invalid values fail the build. README explains GitHub Settings, file editing, precedence and the need to rebuild after changing a repository variable. Existing full-site pages remain directly accessible.
+- Separate build assertions passed for `sl` → `/sl/`, `en` → `/en/` and `coming-soon` with base `/lab` → `/lab/en/coming-soon/`. An invalid selection failed with the expected explanatory error. The final build was restored to the file default and root base. Regular verification now asserts the configured root redirect and its fallback link.
+- `npm run verify` passed: **0 errors/warnings/hints across 26 files; 80 static pages, 78 translated routes, 2,745 internal links/assets and all 5 calendar cases**.
+- Safari desktop: entered `/` and confirmed navigation to the English Coming soon page; visually reviewed its heading, contact button, existing logo, whitespace and footer. Switched SL to the equivalent Kmalu page, selected Dark and visually reviewed the translated page, dark colours and visible select focus. No new phone-width review was performed; the earlier mobile verification limitation remains.
+- No push, remote setting change or deployment was performed. The development server remains running.
+
 ## GitHub Pages deployment — 11 November 2026
 
 - The user supplied the organization and repository. Production origin is now **https://agenticlab-um-si.github.io**, base **/**; `.git` is part of the repository clone URL only. `astro.config.mjs` defaults to that origin and retains `SITE_URL`/`BASE_PATH` overrides. This resolves the earlier pending production-origin configuration.

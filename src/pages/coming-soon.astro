@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { asset, collection } from '../lib/site';
+const page = (await collection('pages', 'en')).find(entry => entry.data.key === 'coming-soon')!;
+---
+<Layout lang="en" title={page.data.title} description={page.data.shortDescription} path="coming-soon" minimal>
+  <section class="launch container" aria-labelledby="launch-title">
+    <div class="launch-copy">
+      <span class="eyebrow">{page.data.eyebrow}</span>
+      <h1 id="launch-title">{page.data.title}</h1>
+      <p class="launch-description">{page.data.shortDescription}</p>
+      <a class="button primary" href="mailto:luka.pavlic@um.si">Get in touch <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="launch-signature" aria-hidden="true">
+      <img src={asset('branding/agentic-lab-mark-recoloured.png')} width="256" height="256" alt="" />
+      <span>agentic<span class="signature-light">lab</span><span class="signature-dot">.</span></span>
+    </div>
+    <footer class="launch-footer"><p>{page.data.supporting}</p><p>UM FERI <span aria-hidden="true">·</span> Maribor</p></footer>
+  </section>
+</Layout>
+<style>
+.launch{min-height:calc(100svh - 84px);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center;gap:3rem;padding-top:clamp(3rem,8vh,6rem)}
+.launch-copy{padding-block:2rem 4rem}.launch .eyebrow{display:flex;align-items:center;gap:.7rem;line-height:1.7}
+.launch h1{font-size:clamp(3.5rem,7.5vw,7.5rem);letter-spacing:-.075em;line-height:1.05;margin:1.5rem 0;color:var(--color-brand)}
+.launch-description{max-width:38ch;color:var(--color-muted);font-size:clamp(1rem,1.5vw,1.2rem);margin:0 0 2rem}
+.launch-signature{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:2rem;border-left:1px solid var(--color-line)}.launch-signature img{width:clamp(8rem,16vw,15rem);height:auto;filter:var(--brand-logo-filter)}.launch-signature>span{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;letter-spacing:-.07em;line-height:1}.signature-light{font-weight:450}.signature-dot{color:var(--color-brand)}
+.launch-footer{grid-column:1/-1;align-self:end;display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--color-line);padding:1.2rem 0;color:var(--color-muted);font-size:.7rem}.launch-footer p{margin:0}
+@media(max-width:1050px){.launch{min-height:calc(100svh - 72px)}}
+@media(max-width:640px){.launch{grid-template-columns:1fr;gap:0;padding-top:2rem}.launch-copy{padding:1rem 0 2rem}.launch h1{font-size:clamp(3rem,14vw,5rem)}.launch-signature{border-left:0;border-top:1px solid var(--color-line);flex-direction:row;justify-content:flex-start;padding:1.5rem 0;gap:1rem}.launch-signature img{width:4rem}.launch-signature>span{font-size:2rem}.launch-footer{flex-wrap:wrap;font-size:.65rem}}
+</style>
