@@ -1,6 +1,6 @@
 # Implementation plan
 
-## People ordering and homepage portraits — 11 November 2026
+## People ordering and homepage portraits — 11 November 2026 
 
 - [x] Sort core members and collaborators by surname, then given name, using Slovenian collation in both languages.
 - [x] Feature Luka Pavlič, Marjan Heričko, Tina Beranič, Luka Četina and Alen Rajšp in that order on both homepages, with smaller centered portraits and a responsive five-column desktop grid.
