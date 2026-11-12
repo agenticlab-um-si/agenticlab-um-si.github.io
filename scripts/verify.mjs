@@ -48,6 +48,11 @@ for(const file of files){
       assert.match(html,/luka-pavlic\.jpg/,`${relative}: real portrait`);
       assert.match(html,/Tjan Kazar/,`${relative}: collaborators render with optional fields absent`);
     }
+    if(relative.endsWith('/events/')){
+      const eventTitles=[...html.matchAll(/<(h[1-6])\b[^>]*class="[^"]*\bevent-title\b[^"]*"[^>]*>/g)];
+      assert.ok(eventTitles.length>0,`${relative}: renders event feature titles`);
+      assert.ok(eventTitles.every(m=>m[1]==='h3'),`${relative}: event feature titles use h3 under h2 section headings`);
+    }
   }
   const ids=new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]));
   for(const match of html.matchAll(/\b(href|src)="([^"]+)"/g)){
