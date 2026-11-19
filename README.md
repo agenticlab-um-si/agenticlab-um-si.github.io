@@ -108,7 +108,7 @@ Copy `people/en/tjan-kazar.md` and the Slovenian version. Set name/key, `memberT
 
 ### Edit Industry Collaboration and About
 
-Edit `services/{en,sl}/*.md` for assessment, pilots, workshops, consulting, architecture and joint R&D. Edit `pages/{en,sl}/industry.md` for the opening and shared approach. `pages/{en,sl}/about.md` holds the institutional context and mission; `research.md` holds research philosophy and activities. Page introductions for all sections are in `pages`. Common CTA copy and presentation labels live in their small Astro components. Contact uses the verified `luka.pavlic@um.si` address; no special lab inbox is invented.
+Edit `services/{en,sl}/*.md` for assessment, pilots, workshops, consulting, architecture and joint R&D. Edit `pages/{en,sl}/industry.md` for the opening and shared approach. `pages/{en,sl}/about.md` holds the institutional context and mission; `research.md` holds research philosophy and activities. Page introductions for all sections are in `pages`. Common CTA copy and presentation labels live in their small Astro components. The lab contact address is `agenticlab.feri@um.si` and is configured in `src/lib/site.ts`.
 
 ## Design, typography and themes
 

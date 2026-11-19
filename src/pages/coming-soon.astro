@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { asset, collection } from '../lib/site';
+import { asset, collection, contactEmail } from '../lib/site';
 const page = (await collection('pages', 'en')).find(entry => entry.data.key === 'coming-soon')!;
 ---
 <Layout lang="en" title={page.data.title} description={page.data.shortDescription} path="coming-soon" minimal>
@@ -9,7 +9,7 @@ const page = (await collection('pages', 'en')).find(entry => entry.data.key === 
       <span class="eyebrow">{page.data.eyebrow}</span>
       <h1 id="launch-title">{page.data.title}</h1>
       <p class="launch-description">{page.data.shortDescription}</p>
-      <a class="button primary" href="mailto:luka.pavlic@um.si">Get in touch <span aria-hidden="true">↗</span></a>
+      <a class="button primary" href={`mailto:${contactEmail}`}>Get in touch <span aria-hidden="true">↗</span></a>
     </div>
     <div class="launch-signature" aria-hidden="true">
       <img src={asset('branding/agentic-lab-mark-recoloured.png')} width="256" height="256" alt="" />

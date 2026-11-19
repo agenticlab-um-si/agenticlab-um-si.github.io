@@ -1,10 +1,10 @@
 ---
-import { href, navigation, t, type Lang } from '../lib/site';
+import { contactEmail, href, navigation, t, type Lang } from '../lib/site';
 const {lang,path=''} = Astro.props as {lang:Lang;path?:string};
 ---
 <footer>
   <div class="container footer-top">
-    <div class="footer-identity"><a class="footer-logo" href={href(lang)}>agentic<span class="footer-logo-light">lab</span><span class="footer-logo-dot">.</span></a><p>{t(lang,'Software engineering. With evidence.','Programsko inženirstvo. Z dokazi.')}</p><a class="text-link" href="mailto:luka.pavlic@um.si">agentic.lab@um.si <span aria-hidden="true">↗</span></a></div>
+    <div class="footer-identity"><a class="footer-logo" href={href(lang)}>agentic<span class="footer-logo-light">lab</span><span class="footer-logo-dot">.</span></a><p>{t(lang,'Software engineering. With evidence.','Programsko inženirstvo. Z dokazi.')}</p><a class="text-link" href={`mailto:${contactEmail}`}>{contactEmail} <span aria-hidden="true">↗</span></a></div>
     <div class="footer-institution"><span class="eyebrow">{t(lang,'Rooted in research','Raziskovalna podlaga')}</span><p><a href="https://ii.feri.um.si/sl/">{t(lang,'Information Systems Laboratory (LIS)','Laboratorij za informacijske sisteme (LIS)')}</a><br/><a href="https://ii.feri.um.si/sl/">{t(lang,'Institute of Informatics','Inštitut za informatiko')}</a><br/><a href="https://feri.um.si/">{t(lang,'Faculty of Electrical Engineering and Computer Science','Fakulteta za elektrotehniko, računalništvo in informatiko')}</a></p><a href="https://www.um.si/">{t(lang,'University of Maribor','Univerza v Mariboru')} ↗</a></div>
     <nav aria-label={t(lang,'Footer navigation','Navigacija v nogi')}>{navigation[lang].map(([slug,label])=><a href={href(lang,slug)}>{label}</a>)}</nav>
   </div>
