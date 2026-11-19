@@ -1,5 +1,9 @@
 # Implementation plan
 
+## Cloudflare Web Analytics — 19 November 2026
+
+- [x] Add the supplied snippet at the end of the shared Astro layout and verify its placement in the generated HTML.
+
 ## People ordering and homepage portraits — 11 November 2026 
 
 - [x] Sort core members and collaborators by surname, then given name, using Slovenian collation in both languages.

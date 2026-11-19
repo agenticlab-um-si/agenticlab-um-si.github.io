@@ -35,5 +35,8 @@ const canonical = Astro.site ? new URL(minimal ? asset('coming-soon/') : href(la
     <Header lang={lang} path={path} minimal={minimal}/>
     <main id="main" tabindex="-1"><slot /></main>
     {!minimal && <Footer lang={lang} path={path}/>}
+    <!-- Cloudflare Web Analytics -->
+    <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2cbced7f8f5a4c9f933831386bf3bfce"}'></script>
+    <!-- End Cloudflare Web Analytics -->
   </body>
 </html>

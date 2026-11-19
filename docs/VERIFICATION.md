@@ -217,6 +217,12 @@ No Playwright/Lighthouse/axe audit, real-device test, broad cross-browser test o
 - Safari desktop: opened a fresh tab at http://localhost:4321/sl/ and visually confirmed the current eight-node olive logo beside the tab title. The existing 127.0.0.1 tab still showed the old icon, consistent with retained browser favicon state. Browser caches/settings were not cleared or changed.
 - `npm run verify` passed: 0 errors/warnings/hints across 25 files; 78 static pages, 76 translated routes, 2,880 internal links/assets; all 5 calendar cases passed. `git diff --check` passed. No deployment or push occurred.
 
+## Cloudflare Web Analytics — 19 November 2026
+
+- `npm run verify` passed with 0 errors, warnings or hints. The build generated 79 HTML pages, and all 5 calendar cases passed.
+- Checked the generated HTML for exactly one beacon with the supplied token immediately before the closing body tag on all 78 pages that use the shared layout. The root redirect delegates tracking to its destination.
+- Verification covered generated HTML. Live event delivery to Cloudflare remains unverified.
+
 ## Footer wordmark - 6 November 2026
 
 - Footer lab suffix now uses font-weight 450, matching the header. The dot retains its brand colour and agentic retains the existing bold weight. Shared footer applies to both languages.

@@ -47,5 +47,5 @@
 
 ## S10 — Accessibility, SEO and verification
 - **AC10.1** Semantic HTML, one page h1, skip link, useful alt text, focus visibility, keyboard controls, sufficient contrast, reduced motion and responsive layout.
-- **AC10.2** Titles, descriptions, OpenGraph, canonical/hreflang, favicon, configurable sitemap/robots. No invented production origin, analytics or cookie banner.
+- **AC10.2** Titles, descriptions, OpenGraph, canonical/hreflang, favicon, configurable sitemap/robots, and Cloudflare Web Analytics on pages rendered by the shared layout. No invented production origin or cookie banner.
 - **AC10.3** Install; check types and build; audit internal and content external links; check translations, themes, navigation, filters, default images, optional fields, mobile and final visual design. Record actual results and remaining limits.
